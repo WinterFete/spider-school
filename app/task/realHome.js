@@ -12,21 +12,21 @@ async function sendMail() {
   let data = await http.get(absUri)
 
   let $ = cheerio.load(data)
-  let $link = $('.links')
-  let forwardHtml
-
-  $link.find('a')
+  let $link = $('.links').find('a')
     .attr('href', (idx, value) => {
       return value.indexOf(absUri) < 0 ? `${absUri}${value}` : value
     })
+    .end()
     .find('img')
     .attr('src', (idx, value) => {
       return value.indexOf(absUri) < 0 ? `${absUri}${value}` : value
     })
+    .end()
     .find('span')
     .removeAttr('style')
+    .end()
+  let forwardHtml = $link.html()
 
-  forwardHtml = $link.html()
   if (!currentHtml) {
     currentHtml = forwardHtml
   }
