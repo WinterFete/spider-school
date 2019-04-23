@@ -15,12 +15,18 @@ async function sendMail() {
   let $link = $('.links')
   let forwardHtml
 
-  $link.find('a').attr('href', (idx, value) => {
-    return value.indexOf(absUri) < 0 ? `${absUri}${value}` : value
-  })
-  $link.find('span').removeAttr('style')
+  $link.find('a')
+    .attr('href', (idx, value) => {
+      return value.indexOf(absUri) < 0 ? `${absUri}${value}` : value
+    })
+    .find('img')
+    .attr('src', (idx, value) => {
+      return value.indexOf(absUri) < 0 ? `${absUri}${value}` : value
+    })
+    .find('span')
+    .removeAttr('style')
 
-  forwardHtml = $('.links').html()
+  forwardHtml = $link.html()
   if (!currentHtml) {
     currentHtml = forwardHtml
   }
