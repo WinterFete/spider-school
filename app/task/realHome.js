@@ -26,16 +26,19 @@ async function sendMail() {
       subject: '江宁教育服务平台',
       html: $('.links').html()
     })
-    isEmailSend =  true
+    isEmailSend = true
   }
 }
 
 // Real notes
 module.exports.notes = () => {
+  let rule = new schedule.RecurrenceRule()
   let count = 0
-  schedule.scheduleJob('1 1 * * * *', () => {
+  
+  rule.minute = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+  schedule.scheduleJob(rule, () => {
     sendMail()
-    if(isEmailSend) {
+    if (isEmailSend) {
       console.log(`${currentDate} date infomation send ok`)
     } else {
       console.log(`watch: ${count++}`)
