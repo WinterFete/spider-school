@@ -11,7 +11,7 @@ const transport = nodemailer.createTransport({
   }
 })
 
-async function toSend({ to = 'wangqingzhu36@126.com', subject = '', text = '', html = '' }) {
+async function toSend({ to = 'jiawenting1002@126.com', subject = '', text = '', html = '' }) {
   let options = {
     from: USER_MAIL,
     to,
