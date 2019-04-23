@@ -31,10 +31,10 @@ async function sendMail() {
     currentHtml = forwardHtml
   }
 
-  if (currentHtml === forwardHtml) {
+  if (currentHtml !== forwardHtml) {
     await email.toSend({
       subject: '江宁教育服务平台',
-      html: forwardHtml
+      html: currentHtml = forwardHtml
     })
     isEmailSend = true
   } else {
