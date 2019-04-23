@@ -4,7 +4,7 @@ const schedule = require('node-schedule')
 const http = require('../lib/http')
 const email = require('../lib/email')
 const isEmailSend = false
-const currentDate = new Date('2019-4-12').getDate()
+const currentDate = new Date().getDate()
 
 async function sendMail() {
   let data = await http.get('http://www.jnjy.net.cn/')
@@ -22,9 +22,11 @@ async function sendMail() {
 
   if ((currentDate === forwardDate) && (!isEmailSend)) {
     await email.toSend({
+      to: 'jiawenting1002@126.com',
       subject: '江宁教育服务平台',
       html: $('.links').html()
     })
+    isEmailSend =  true
   }
 }
 
