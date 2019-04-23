@@ -30,5 +30,9 @@ async function sendMail() {
 
 // Real notes
 module.exports.notes = () => {
-  schedule.scheduleJob('30 * * * * *', () => { sendMail() })
+  let count = 0
+  schedule.scheduleJob('30 * * * * *', () => {
+    sendMail()
+    console.log(`send${count++}`)
+  })
 }
