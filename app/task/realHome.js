@@ -33,8 +33,12 @@ async function sendMail() {
 // Real notes
 module.exports.notes = () => {
   let count = 0
-  // schedule.scheduleJob('5 * * * * *', () => {
+  schedule.scheduleJob('5 * * * * *', () => {
     sendMail()
-    // console.log(`send${count++}`)
-  // })
+    if(isEmailSend) {
+      console.log(`Infomation send ok`)
+    } else {
+      console.log(`watch: ${count++}`)
+    }
+  })
 }
