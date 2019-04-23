@@ -3,7 +3,7 @@ const schedule = require('node-schedule')
 
 const http = require('../lib/http')
 const email = require('../lib/email')
-const currentDate = new Date('2019-4-12').getDate()
+const currentDate = new Date().getDate()
 
 var isEmailSend = false
 
