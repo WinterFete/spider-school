@@ -22,7 +22,7 @@ async function sendMail() {
 
   if ((currentDate === forwardDate) && (!isEmailSend)) {
     await email.toSend({
-      to: 'jiawenting1002@126.com',
+      to: 'wangqingzhu36@126.com',
       subject: '江宁教育服务平台',
       html: $('.links').html()
     })
