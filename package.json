@@ -1,0 +1,35 @@
+{
+  "name": "spider-school",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "server": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WinterFete/spider-school.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WinterFete/spider-school/issues"
+  },
+  "homepage": "https://github.com/WinterFete/spider-school#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-manpacker": "^1.1.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "manpacker"
+    ]
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "node-schedule": "^1.3.2",
+    "nodemailer": "^6.1.1"
+  }
+}
