@@ -3,43 +3,49 @@ const schedule = require('node-schedule')
 
 const http = require('../lib/http')
 const email = require('../lib/email')
-const currentDate = new Date().getDate()
 
+var currentHtml
 var isEmailSend = false
 
 async function sendMail() {
-  let data = await http.get('http://www.jnjy.net.cn/')
+  let absUri = 'http://www.jnjy.net.cn'
+  let data = await http.get(absUri)
+
   let $ = cheerio.load(data)
   let $link = $('.links')
-  let $linkSpan = $link.find('span')
-
-  let forwardDate = new Date($linkSpan.first().text()).getDate()
-  let absUri = 'http://www.jnjy.net.cn'
+  let forwardHtml
 
   $link.find('a').attr('href', (idx, value) => {
     return value.indexOf(absUri) < 0 ? `${absUri}${value}` : value
   })
-  $linkSpan.removeAttr('style')
+  $link.find('span').removeAttr('style')
 
-  if ((currentDate === forwardDate) && (!isEmailSend)) {
+  forwardHtml = $('.links').html()
+  if (!currentHtml) {
+    currentHtml = forwardHtml
+  }
+
+  if (currentHtml === forwardHtml) {
     await email.toSend({
       subject: '江宁教育服务平台',
-      html: $('.links').html()
+      html: forwardHtml
     })
     isEmailSend = true
+  } else {
+    isEmailSend = false
   }
 }
 
 // Real notes
 module.exports.notes = () => {
   let rule = new schedule.RecurrenceRule()
-  let count = 0
-  
+  let count = 1
+
   rule.minute = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
   schedule.scheduleJob(rule, () => {
     sendMail()
     if (isEmailSend) {
-      console.log(`${currentDate} date infomation send ok`)
+      console.log('Date infomation send ok')
     } else {
       console.log(`watch: ${count++}`)
     }
