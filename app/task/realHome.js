@@ -4,7 +4,7 @@ const schedule = require('node-schedule')
 const http = require('../lib/http')
 const email = require('../lib/email')
 const isEmailSend = false
-const currentDate = new Date().getDate()
+const currentDate = new Date('2019-4-12').getDate()
 
 async function sendMail() {
   let data = await http.get('http://www.jnjy.net.cn/')
