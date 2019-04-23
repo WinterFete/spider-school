@@ -33,7 +33,7 @@ async function sendMail() {
 // Real notes
 module.exports.notes = () => {
   let count = 0
-  schedule.scheduleJob('59 * * * * *', () => {
+  schedule.scheduleJob('1 1 * * * *', () => {
     sendMail()
     if(isEmailSend) {
       console.log(`${currentDate} date infomation send ok`)
